@@ -1,0 +1,74 @@
+# Rust build directory
+/target/
+
+# Rust generated files
+**/*.rs.bk
+Cargo.lock
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Debug files
+*.pdb
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Backup files
+*~
+*.bak
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Profiling data
+*.profile
+callgrind.out.*
+perf.data
+perf.data.old
+
+# Test coverage
+coverage/
+*.lcov
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env 
