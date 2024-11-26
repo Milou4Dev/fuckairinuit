@@ -24,6 +24,9 @@ git clone $GITHUB_REPO $APP_DIR
 chown -R $SERVICE_USER:$SERVICE_USER $APP_DIR
 chmod 750 $APP_DIR
 
+# Pre-download dependencies
+su - $SERVICE_USER -c "cd $APP_DIR && . ~/.cargo/env && cargo fetch"
+
 cat >/etc/systemd/system/rustapp.service <<'EOL'
 [Unit]
 Description=Rust Application Service
@@ -44,7 +47,6 @@ LimitNOFILE=65535
 TimeoutStartSec=0
 NoNewPrivileges=true
 ProtectSystem=strict
-ProtectHome=read-only
 PrivateTmp=true
 PrivateDevices=true
 ProtectKernelTunables=true
