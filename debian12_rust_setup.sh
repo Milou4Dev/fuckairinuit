@@ -16,7 +16,8 @@ apt-get install -y curl build-essential pkg-config libssl-dev git
 
 useradd -r -m -s /bin/bash $SERVICE_USER
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | su - $SERVICE_USER -c 'sh -s -- -y'
+su - $SERVICE_USER -c 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'
+su - $SERVICE_USER -c '. $HOME/.cargo/env'
 
 mkdir -p $APP_DIR
 git clone $GITHUB_REPO $APP_DIR
@@ -35,7 +36,7 @@ User=rustservice
 Group=rustservice
 WorkingDirectory=/opt/rustapp
 Environment="PATH=/home/rustservice/.cargo/bin:/usr/local/bin:/usr/bin:/bin"
-ExecStart=/home/rustservice/.cargo/bin/cargo run --release
+ExecStart=/bin/bash -c 'source /home/rustservice/.cargo/env && exec /home/rustservice/.cargo/bin/cargo run --release'
 Restart=always
 RestartSec=1
 StartLimitBurst=0
@@ -43,7 +44,7 @@ LimitNOFILE=65535
 TimeoutStartSec=0
 NoNewPrivileges=true
 ProtectSystem=strict
-ProtectHome=true
+ProtectHome=read-only
 PrivateTmp=true
 PrivateDevices=true
 ProtectKernelTunables=true
