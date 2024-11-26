@@ -14,10 +14,11 @@ GITHUB_REPO="https://github.com/Milou4Dev/fuckairinuit"
 apt-get update && apt-get upgrade -y
 apt-get install -y curl build-essential pkg-config libssl-dev git
 
-useradd -r -s /bin/false $SERVICE_USER
+useradd -r -m -s /bin/bash $SERVICE_USER
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | su - $SERVICE_USER -c 'sh -s -- -y'
 
+mkdir -p $APP_DIR
 git clone $GITHUB_REPO $APP_DIR
 chown -R $SERVICE_USER:$SERVICE_USER $APP_DIR
 chmod 750 $APP_DIR
